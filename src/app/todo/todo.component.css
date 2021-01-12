@@ -36,7 +36,14 @@ ol.todo {
     padding-left: 0;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    width: 75vw;
+}
+
 input {
+    display: flex;
     font-size: 14px;
     border: #eee 1px solid;
     padding: 3px;
@@ -60,10 +67,13 @@ li {
 li::before {
     counter-increment: itemcount;
     content: counter(itemcount) ". ";
+    display: inline-block;
+    text-align: right;
+    width: 11px;
 }
 
 span {
-    padding-left: 10px;
+    padding-left: 15px;
 }
 
 .complete {
@@ -75,7 +85,7 @@ span {
     font-size: .9em;
     font-weight: 100;
     padding: 2px 3px;
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 .delete {
@@ -88,7 +98,7 @@ span {
     margin: 2px 0;
 }
 
-.add {
+.addBtn {
     border: none;
     background-color: #ff1493;
     border-radius: 3px;

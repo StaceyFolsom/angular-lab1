@@ -14,15 +14,21 @@
     <main>
       <h1>TODO List</h1>
       <p>A place to store your todos</p>
-      <input type="text" placeholder="Filter your to-dos" />
+      <form>
+      <input class="filter" name="filter" [(ngModel)]="filter" type="text" placeholder="Filter your to-dos" />
+    </form>
       <ol class="todo">
-        <li *ngFor="let item of todo">
-          <button class="complete" *ngIf="!item.completed">Complete</button><span [ngStyle]="{'text-decoration': item.completed === true ? 'line-through' : 'none'}"> {{ item.task }}</span>
-          <button class="delete">X</button>
+          <li *ngFor="let item of getFilteredResults(); let i = index">
+            <!-- <li *ngFor="let item of todo | filter: searchText; let i = index"> -->
+          <button class="complete" *ngIf="!item.completed" (click)="completeTask(i)">Complete</button>
+          <span [ngStyle]="{'text-decoration' : item.completed === true ? 'line-through' : 'none'}">
+            {{ item.task }}
+            </span>
+          <button class="delete" (click)="removeTask(i)">X</button>
         </li>
       </ol>
-      <input type="text" placeholder="Add your to-do" />
-      <button class="add">Add</button>
+      <input class="new-todo" [(ngModel)]="newItem" type="text" placeholder="Add your to-do" />
+      <button class="addBtn" (click)="addTask(newItem)">Add</button>
     </main>
   </body>
 </html>

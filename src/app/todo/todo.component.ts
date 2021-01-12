@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { discardPeriodicTasks } from '@angular/core/testing';
 
 interface Todo {
   task: string;
@@ -12,9 +11,10 @@ interface Todo {
   styleUrls: ['./todo.component.css']
 })
 export class TodoComponent implements OnInit {
-  public todo: Todo[];
+  filter: string = "";
+  todo: Todo[];
   constructor() { 
-  this.todo = [
+    this.todo = [
       {
         task: "fold clothes",
         completed: false,
@@ -39,10 +39,36 @@ export class TodoComponent implements OnInit {
         task: "take down Christmas tree",
         completed: true,
       },
-    ];
+    ]; console.log(this.todo);
   }
 
   ngOnInit(): void {
   }
 
-}
+  newItem : TodoComponent;
+
+  addTask(newItem) : void {
+    if (newItem == null) {
+      alert("Did you forget something?");
+    } else {
+      this.todo.push({task: newItem, completed: false});
+      this.newItem = null;
+    }
+  }
+
+  removeTask(i) : void {
+    this.todo.splice(i, 1);
+  }
+
+  completeTask(i) : void {
+    let task = this.todo[i];
+    task.completed = true;
+  }
+
+  getFilteredResults() {
+    return this.todo.filter((todo) => {
+      return todo.task.toLowerCase().includes(this.filter.toLowerCase());
+    });
+  }
+
+  }
